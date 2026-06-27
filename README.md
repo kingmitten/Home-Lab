@@ -1,10 +1,15 @@
-# Home-Lab
-Infrastructure configuration and architecture documentation for a Proxmox VE home lab. Features a ZFS RAID 1 NAS, secure network routing , an isolated Minecraft server and custom development sandboxes.
+# Proxmox VE Home-Lab
 
+Infrastructure configuration and architecture documentation for a Proxmox VE home lab. This environment is designed for secure network routing, isolated development sandboxes (like a dedicated Minecraft server), and testing backend infrastructure.
 
 ## Hardware Specifications
-* CPU : i7-3770
-* RAM : 16 GB of DDR 3
-* Network Storage Array : ZFS 
-  * Why: This is done to help with long term reliability as this contains extra features compared to the RAID 1 system ZFS contains things like self healing data RAID 1 systems are prone to bit rot where the data silently corrupts. ZFS uses a mathematical system which is checksum to store data for example if disk a flips a bit ZFS can detect that and copy the original bit from disk B and overwrite the corrupted block 
-* Network Interface : standard gigabit port
+
+* **CPU:** Intel Core i7-3770
+* **RAM:** 16 GB DDR3
+* **Network Interface:** Gigabit Ethernet NIC
+
+## Storage Architecture (In Progress)
+
+* **Storage Array:** ZFS Mirrored vDev (RAID 1 equivalent)
+* **Architecture Rationale:** ZFS is being implemented over standard hardware RAID 1 to ensure long-term data reliability. Traditional RAID arrays are vulnerable to "bit rot" (silent data corruption). ZFS solves this by using cryptographic checksums for every block of data. If ZFS detects a flipped bit on Disk A, its self-healing architecture will automatically pull the clean data from Disk B and overwrite the corrupted block in real-time.
+
